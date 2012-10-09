@@ -7,7 +7,7 @@ branch = "xx-x"
 account = "xx-x"
 password = "xx"
 
-browser = webdriver.Chrome() # Get local session of firefox
+browser = webdriver.Chrome()
 browser.get("https://www2.bancobrasil.com.br/aapf/login.jsp?aapf.IDH=sim&perfil=1") # Load page
 assert "[bb.com.br]" in browser.title
 elem = browser.find_element_by_name("dependenciaOrigem") # Find the query box
