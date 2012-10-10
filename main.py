@@ -7,7 +7,7 @@ import os
 from appscript import app
 from stat import S_ISREG, ST_CTIME, ST_MODE
 import sys
-
+from optparse import OptionParser
 
 
 def get_last_downloaded_file(download_dir):
@@ -25,14 +25,49 @@ def get_last_downloaded_file(download_dir):
 
 
 
+parser = OptionParser()
 
-download_dir = "/Users/igor/Downloads"
-branch = "xx"
-account = "xx"
-password = "xx"
+parser.add_option("--branch", dest="branch",help="Informe sua agencia bancaria")
+parser.add_option("--account", dest="account",help="Informe sua conta bancaria")
+parser.add_option("--password", dest="password",help="Informe sua senha bancaria")
+parser.add_option("--downloaddir", dest="download_dir",help="Informe o diretorio de destino")
+parser.add_option("--me_email", dest="me_email",help="Informe o e-mail de cadastro do minhaseconomias.com.br")
+parser.add_option("--me_password", dest="me_password",help="Informe a senha de cadastro do minhaseconomias.com.br")
+    
+(options, args) = parser.parse_args()
 
-me_email = "igordeoliveirasa@gmail.com"
-me_password = "xx"
+if not options.branch:
+    raise parser.error("Informe sua agencia bancaria (--branch <valor>)")
+
+if not options.account:
+    raise parser.error("Informe sua conta bancaria (--account <valor>)")
+
+if not options.password:
+    raise parser.error("Informe sua senha bancaria (--password <valor>)")
+
+if not options.download_dir:
+    raise parser.error("Informe o diretorio de destino (--downloaddir \"<valor>\")")
+
+if not options.me_email:
+    raise parser.error("Informe o e-mail de cadastro do minhaseconomias.com.br (--me_email \"<valor>\")")
+
+if not options.me_password:
+    raise parser.error("Informe a senha de cadastro do minhaseconomias.com.br (--me_password \"<valor>\")")
+
+
+download_dir = options.download_dir
+branch = options.branch
+account = options.account
+password = options.password
+
+me_email = options.me_email
+me_password = options.me_password
+
+if not os.path.isdir(download_dir):
+    print "Informe um diretorio para download valido."
+    sys.exit(1)
+
+
 
 browser = webdriver.Firefox()
 browser.get("https://www2.bancobrasil.com.br/aapf/login.jsp")
