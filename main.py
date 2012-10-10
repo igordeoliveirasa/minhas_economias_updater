@@ -70,6 +70,8 @@ if not os.path.isdir(download_dir):
 
 
 browser = webdriver.Firefox()
+
+'''
 browser.get("https://www2.bancobrasil.com.br/aapf/login.jsp")
 time.sleep(20)
 #assert "[bb.com.br]" in browser.title
@@ -114,13 +116,15 @@ app('System Events').keystroke('\r')
 
 
 time.sleep(5)
+'''
+
 last_downloaded_file = get_last_downloaded_file(download_dir)
 last_downloaded_file_path = os.path.join(download_dir, last_downloaded_file)
 print last_downloaded_file_path
 
 browser.get("https://wwws.minhaseconomias.com.br")
 
-time.sleep(20)
+time.sleep(10)
 
 elem = browser.find_element_by_name("email")
 elem.send_keys(me_email)
@@ -131,20 +135,31 @@ elem.send_keys(me_password)
 elem = browser.find_element_by_name("OK")
 elem.click()
 
-time.sleep(20)
-# get all entries in the directory w/ stats
-#entries = (os.path.join(download_dir, fn) for fn in os.listdir(download_dir))
-#entries = ((os.stat(path), path) for path in entries)
+time.sleep(13)
 
-# leave only regular files, insert creation date
-#entries = ((stat[ST_CTIME], path)
-#           for stat, path in entries if S_ISREG(stat[ST_MODE]))
-#NOTE: on Windows `ST_CTIME` is a creation date 
-#  but on Unix it could be something else
-#NOTE: use `ST_MTIME` to sort by a modification date
+elem = browser.find_element_by_id("ext-gen181") # transacoes
+elem.click()
 
-#for cdate, path in sorted(entries):
-#    print time.ctime(cdate), os.path.basename(path)
+time.sleep(1)
+
+elem = browser.find_element_by_id("ext-gen875") # importar
+elem.click()
+
+time.sleep(2)
+
+elem = browser.find_element_by_xpath("//b[contains(text(),'Avan')]") # avancar
+elem.click()
+
+time.sleep(1)
+
+elem = browser.find_element_by_xpath("//input[@type='text'][@size='20']")
+elem.send_keys(last_downloaded_file_path)
+
+elem = browser.find_element_by_id("ext-comp-1759")
+elem.send_keys("CC BB")
+
+elem = browser.find_element_by_id("ext-gen898")
+elem.click()
 
 
 try:
