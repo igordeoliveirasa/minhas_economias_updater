@@ -37,6 +37,8 @@ me_password = "xx"
 browser = webdriver.Firefox()
 browser.get("https://www2.bancobrasil.com.br/aapf/login.jsp")
 time.sleep(20)
+#assert "[bb.com.br]" in browser.title
+elem = browser.find_element_by_name("dependenciaOrigem")
 elem.send_keys(branch)
 
 elem = browser.find_element_by_name("numeroContratoOrigem")
@@ -64,8 +66,17 @@ elem.click()
 time.sleep(5)
 
 
+#req = urllib2.Request('http://www.example.com/')
+#r = urllib2.urlopen(req)
+#print r.read()
+
 app('Firefox').activate()
 app('System Events').keystroke('\r')
+
+#popup = browser.switch_to_alert()
+#assert alert.text == 'Server Login Error...'
+#popup.accept()
+
 
 time.sleep(5)
 last_downloaded_file = get_last_downloaded_file(download_dir)
@@ -86,6 +97,20 @@ elem = browser.find_element_by_name("OK")
 elem.click()
 
 time.sleep(20)
+# get all entries in the directory w/ stats
+#entries = (os.path.join(download_dir, fn) for fn in os.listdir(download_dir))
+#entries = ((os.stat(path), path) for path in entries)
+
+# leave only regular files, insert creation date
+#entries = ((stat[ST_CTIME], path)
+#           for stat, path in entries if S_ISREG(stat[ST_MODE]))
+#NOTE: on Windows `ST_CTIME` is a creation date 
+#  but on Unix it could be something else
+#NOTE: use `ST_MTIME` to sort by a modification date
+
+#for cdate, path in sorted(entries):
+#    print time.ctime(cdate), os.path.basename(path)
+
 
 try:
     
