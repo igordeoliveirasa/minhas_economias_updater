@@ -135,31 +135,37 @@ elem.send_keys(me_password)
 elem = browser.find_element_by_name("OK")
 elem.click()
 
-time.sleep(13)
+time.sleep(20)
 
 elem = browser.find_element_by_id("ext-gen181") # transacoes
 elem.click()
 
-time.sleep(1)
-
 elem = browser.find_element_by_id("ext-gen875") # importar
 elem.click()
-
-time.sleep(2)
 
 elem = browser.find_element_by_xpath("//b[contains(text(),'Avan')]") # avancar
 elem.click()
 
-time.sleep(1)
-
-elem = browser.find_element_by_xpath("//input[@type='text'][@size='20']")
+elem = browser.find_element_by_class_name("x-form-file")
 elem.send_keys(last_downloaded_file_path)
 
-elem = browser.find_element_by_id("ext-comp-1759")
-elem.send_keys("CC BB")
+#elem = browser.find_element_by_class_name("x-form-text x-form-field x-form-file-text x-form-invalid")
+#elem.send_keys(last_downloaded_file_path)
 
-elem = browser.find_element_by_id("ext-gen898")
-elem.click()
+#elem = browser.find_element_by_xpath("//input[@type='text'][@size='24'][@autocomplete='off'][@style='width: 133px; ']")
+#print elem
+#elem.send_keys("CC BB")
+
+elem = browser.find_elements_by_tag_name("input")
+for i in elem:
+    if i.get_attribute("class") == "x-form-text x-form-field x-form-focus":
+        i.send_keys("CC BB")
+        break
+    
+#elem.click()
+
+#elem = browser.find_element_by_xpath("//b[contains(text(),'Avan')]") # avancar
+#elem.click()
 
 
 try:
