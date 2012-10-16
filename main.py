@@ -135,15 +135,15 @@ elem.send_keys(me_password)
 elem = browser.find_element_by_name("OK")
 elem.click()
 
-time.sleep(20)
+time.sleep(30)
 
 
 browser.execute_script("AppMessenger.fireEvent('panelchanged', 1);") # transacoes
 
+time.sleep(10)
 
-agora eh aqui:
-elem = browser.find_elements_by_xpath("//button") # importar
-elem[-1].click()
+elem = browser.find_elements_by_xpath("//*[contains(@class,'x-btn x-importar x-btn-noicon')]") # importar
+elem[0].click()
 
 elem = browser.find_element_by_xpath("//b[contains(text(),'Avan')]") # avancar
 elem.click()
@@ -176,9 +176,4 @@ elem.click()
 #elem.click()
 
 
-try:
-    
-    time.sleep(60)
-except NoSuchElementException:
-    assert 0, "error"
 browser.close()
