@@ -167,18 +167,12 @@ app('System Events').keystroke('\r')
 elem = browser.find_element_by_xpath("//b[contains(text(),'Avan')]") # avancar
 elem.click()
 
+time.sleep(20) # uploading...
 
+elem = browser.find_elements_by_link_text("aqui") # clicking at aqui link
+elem[0].click()
 
-#elem = browser.find_elements_by_tag_name("input")
-#for i in elem:
-#    if i.get_attribute("class") == "x-form-text x-form-field x-form-focus":
-#        i.send_keys("CC BB")
-#        break
-    
-#elem.click()
-
-#elem = browser.find_element_by_xpath("//b[contains(text(),'Avan')]") # avancar
-#elem.click()
-
+elem = browser.find_elements_by_xpath("//*[contains(text(),'Importar arquivo')]") # clicar no importar arquivo
+elem[-1].click()
 
 browser.close()
