@@ -146,8 +146,12 @@ elem.click()
 elem = browser.find_element_by_xpath("//b[contains(text(),'Avan')]") # avancar
 elem.click()
 
-elem = browser.find_element_by_class_name("x-form-file")
+elem = browser.find_element_by_name("file")
 elem.send_keys(last_downloaded_file_path)
+
+#elem = browser.find_elements_by_xpath("//input[@type='text'][@size='20'][@autocomplete='off']")
+#elem[-3].send_keys(last_downloaded_file_path)
+
 
 
 elem = browser.find_elements_by_xpath("//input[@size='24']") # drop down
