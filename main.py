@@ -137,11 +137,13 @@ elem.click()
 
 time.sleep(20)
 
-elem = browser.find_element_by_id("ext-gen181") # transacoes
-elem.click()
 
-elem = browser.find_element_by_id("ext-gen875") # importar
-elem.click()
+browser.execute_script("AppMessenger.fireEvent('panelchanged', 1);") # transacoes
+
+
+agora eh aqui:
+elem = browser.find_elements_by_xpath("//button") # importar
+elem[-1].click()
 
 elem = browser.find_element_by_xpath("//b[contains(text(),'Avan')]") # avancar
 elem.click()
@@ -161,12 +163,6 @@ elem = browser.find_element_by_xpath("//b[contains(text(),'Avan')]") # avancar
 elem.click()
 
 
-#elem = browser.find_element_by_class_name("x-form-text x-form-field x-form-file-text x-form-invalid")
-#elem.send_keys(last_downloaded_file_path)
-
-#elem = browser.find_element_by_xpath("//input[@type='text'][@size='24'][@autocomplete='off'][@style='width: 133px; ']")
-#print elem
-#elem.send_keys("CC BB")
 
 #elem = browser.find_elements_by_tag_name("input")
 #for i in elem:
