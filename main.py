@@ -1,7 +1,3 @@
-from selenium import webdriver
-import time
-from appscript import app
-import sys
 import arguments_parser
 import banco_do_brasil_navigator
 import minhas_economias_navigator
@@ -11,7 +7,7 @@ if __name__ == "__main__":
 
     bb_navigator = banco_do_brasil_navigator.Navigator()
     bb_navigator.execute_login(arguments.bank_branch, arguments.bank_account, arguments.bank_password)
-    transactions_file_path = bb_navigator.export_transactions(arguments.download_directory_path)
+    transactions_file_path = bb_navigator.export_transactions(arguments.download_directory_path, 1, bb_navigator.MONTH_AUG)
     bb_navigator.close()
 
     minhas_economias_navigator = minhas_economias_navigator.Navigator()
